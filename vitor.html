@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedra, Papel ou Tesoura</title>
+</head>
+<body>
+
+  <script>
+    function obterEscolhaUsuario() {
+      let escolha = prompt("Escolha: Pedra, Papel, Tesoura ou Sair!").toLowerCase();
+      const opcoesValidas = ["pedra", "papel", "tesoura", "sair"];
+
+      while (!opcoesValidas.includes(escolha)) {
+        escolha = prompt("Opção inválida. Escolha: Pedra, Papel, Tesoura ou Sair!").toLowerCase();
+      }
+
+      return escolha;
+    }
+
+    function gerarEscolhaComputador() {
+      const opcoes = ["pedra", "papel", "tesoura"];
+      const indice = Math.floor(Math.random() * 3);
+      return opcoes[indice];
+    }
+
+    function compararEscolhas(jogador_1, jogador_2) {
+      if (jogador_1 === jogador_2) {
+        return "Empate!";
+      }
+
+      if (
+        (jogador_1 === "pedra" && jogador_2 === "tesoura") ||
+        (jogador_1 === "papel" && jogador_2 === "pedra") ||
+        (jogador_1 === "tesoura" && jogador_2 === "papel")
+      ) {
+        return "Você ganhou!";
+      } else {
+        return "Você perdeu!";
+      }
+    }
+
+    function jogar() {
+      alert("Bem vindo ao jogo!");
+
+      while (true) {
+        const jogador = obterEscolhaUsuario();
+
+        if (jogador === "sair") {
+          alert("Jogo encerrado!");
+          break;
+        }
+
+        const computador = gerarEscolhaComputador();
+        alert(`Você escolheu: ${jogador}\nComputador escolheu: ${computador}`);
+
+        const resultado = compararEscolhas(jogador, computador);
+        alert(resultado);
+      }
+
+      const jogarNovamente = confirm("Deseja jogar novamente?");
+      if (jogarNovamente) {
+        jogar(); 
+      } else {
+        alert("Obrigado por jogar!");
+      }
+    }
+
+    jogar();
+  </script>
+
+</body>
+</html>
